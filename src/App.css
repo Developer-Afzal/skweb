@@ -1,38 +1,436 @@
-.App {
-  text-align: center;
+:root{
+    --fs-xxl:28px;
+    --fs-xl:18px;
+    --fs-lg:16px;
+    --fs-m:14px;
+    --fs-sm:12px;
+    --yellow:#dd940b;
+    --lightYellow:#f1bb56;
+    --labelColor:rgb(169, 102, 8);
+    --WhiteColor:#ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.default-btn{
+    padding: 4px 6px;
+    font-size: var(--fs-lg);
+    min-width: 80px;
+    margin: 2px;
+    cursor: pointer;
+    background-color:var(--yellow);
+    color: var(--WhiteColor);
+    border: none;
+    border-radius: 4px;
+}
+
+.default-btn:hover{
+    background-color: #eda92b;
+}
+input::placeholder{
+    color: #494747;
+}
+
+select{
+    color: #494747;
+}
+
+._flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.heading{
+    font-size: var(--fs-xxl);
+    font-weight: 700;
+    color: var(--yellow);
+}
+
+@media(max-width:992px) {
+    :root{
+        --fs-xxl:20px;
+        --fs-xl:14px;
+        --fs-lg:10px;
+        --fs-m:8px;
+        --fs-sm:6px;
+    }
+}
+
+@media(max-width:576px) {
+    :root{
+        --fs-xxl:26px;
+        --fs-xl:14px;
+        --fs-lg:12px;
+        --fs-m:10px;
+        --fs-sm:6px;
+        .icons{
+            width:25px;
+            padding: 2px;
+        }
+        .icons-block{
+                 display: none;
+            }
+
+        .more-icons{
+            width:25px;
+            padding: 2px;
+        }
+    }  
+
+.cal-img{
+    width: 100%;
+}
+  
+}
+
+
+
+
+input{
+    outline: none;
+    width:98%;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+label{
+    display: flex !important;
+    color: var(--labelColor);
+}
+
+.logo-heading{
+    font-size: var(--fs-xxl);
+}
+
+.logo-heading .link{
+    text-decoration: none;
+    color: var(--WhiteColor);
+}
+
+table{
+    width: 100%;
+    
+}
+
+.table-block{
+    height: 300px;
+    margin-top: 10px;
+    background-color: #f499219b;
+
+}
+
+table thead{
+    background-color: #dd940b;
+    height: 40px;
+    color: var(--WhiteColor);
+    font-size: var(--fs-lg);
+}
+
+tbody tr{
+    border-bottom: 4px solid var(--WhiteColor);
+    border-top: 4px solid var(--WhiteColor);
+    height: 52px;
+    font-weight: 600;
+    font-size: var(--fs-m);
+}
+
+thead tr th:first-child{
+    padding-left: 10px;
+}
+
+tbody tr td:first-child{
+    padding-left: 10px;
+    max-width: 100px !important;
+}
+
+
+.view-block{
+    flex-direction: column;
+}
+
+
+
+.header-block{
+    background-color: var(--yellow);
+    min-height: 50px;
+    color: var(--WhiteColor);
+    font-weight: 700;
+}
+
+.header-block .link{
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-block img{
+    height: 35px;
+    cursor: pointer;
+}
+
+.header-input{
+    width: 90%;
+    border: none;
+    color: var(--yellow) ;
+}
+
+form input{
+    padding-left: 10px;
+    border: 1px solid #918a8a;
+    border-radius: 4px;
+}
+
+form select{
+    width:98%;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #918a8a;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+
+.icons{
+    width:30px;
+    padding:5px;
+    cursor: pointer;
+}
+
+/* dashboard Styling Starts here */
+.upperContent{
+    padding: 10px;
+}
+
+
+.dashboard-Card{
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--yellow);
+    box-shadow: 0 3px 6px rgba(245, 179, 26, 0.472), 0 3px 6px rgba(239, 174, 52, 0.23);
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
+}
+
+.dashboard-Card > :first-child{
+    font-size: var(--fs-xxl);
+}
+
+.Dashboardreg-count{
+    box-shadow: 0 3px 6px rgba(245, 179, 26, 0.472), 0 3px 6px rgba(239, 174, 52, 0.23);
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+    margin: 20px auto;
+    font-size: var(--fs-xxl);
+    font-weight: 900;
+}
+
+
+/*  Student List Styling Starts here   */
+
+.layout-Block{
+    min-height: calc(100svh - 100px);
+}
+
+.errorStyle{
+    color:rgb(237, 6, 6);
+    font-Size:var(--fs-sm);
+    font-weight: 600;
+}
+
+.popover{
+    position: relative;
+    bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    width: 40px;
+    height: 20px;
+    border: none !important;
+    background-color: transparent !important;
+    transition: width 1s;
+   
+}
+
+.popoverOpen{
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 4px;
+    right: 5px;
+    width: 100px;
+    display: flex;
+    width: 100px;
+    background-color: #fff;
+    animation-name: example;
+    animation-duration: 1s;
+}
+
+@keyframes example {
+    0%   {width:10px; top:0px;}
+    100% {width:100px; top:0px;}
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .info{
+    margin-left: 10px;
   }
-  to {
-    transform: rotate(360deg);
-  }
+/*  Footer Styling */
+
+.footer-Block{
+    height: 50px;
+    background: var(--yellow);
+    width: 100%;
+}
+
+
+/* login Page styling starts here */
+
+.login-block{
+    background: #ebb042;
+    min-height: calc(100vh - 100px);
+}
+
+.login-block input{
+    margin: 10px 5px;
+    color: var(--yellow);
+}
+
+.login-block p{
+    color: var(--WhiteColor);
+}
+
+
+/* View Page Styling  */
+
+.view-block{
+    padding: 10px, 0;
+    min-height: calc(100vh - 100px);
+    align-items: center;
+}
+.view-block .view-heading{
+    font-size: var(--fs-xxl);
+    font-weight: 700;
+    padding: 40px 0;
+    color: var(--yellow);
+}
+
+
+/* fees status page styling  */
+
+.feePaidstatus-block{
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.unpaid-fee{
+    width: 20px;
+    height:20px;
+    background-color: rgb(252, 59, 5);
+    border-radius: 10px;
+
+}
+
+.null-fee{
+    background-color: #a89c9c;
+}
+
+.paid-fee{
+    width: 20px;
+    height:20px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.select-month{
+    background-color: var(--lightYellow);
+    color: var(--WhiteColor);
+    cursor: pointer; 
+}
+
+.select-month:hover{
+    background-color: var(--yellow);
+}
+
+
+/*  Important Date page styling starts here */
+
+.cal-img{
+    width: 70%;
+}
+.datalist ul{
+    border: 1px solid var(--yellow);
+    padding: 10px;
+    min-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+
+}
+
+.datalist ul li {
+    list-style-type: none;
+    color: var(--yellow);
+   
+}
+
+.datalist ul li:nth-child(2n+1){
+    background-color: var(--yellow);
+    color: var(--WhiteColor);
+}
+
+.important-content{
+    align-items: center;
+}
+
+.skeleton{
+    background-color: var(--lightYellow);
+    width: 100%;
+    animation-name: animate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animate{
+    0% {background: linear-gradient(299deg, rgba(248,193,120,1) 100%, rgba(221,148,11,1) 100%);}
+   25%{background: linear-gradient(299deg, rgba(248,193,120,1) 90%, rgba(221,148,11,1) 100%);}
+   50%{background: linear-gradient(299deg, rgba(248,193,120,1) 70%, rgba(221,148,11,1) 100%); }
+   75%{background: linear-gradient(299deg, rgba(248,193,120,1) 20%, rgba(221,148,11,1) 100%);}
+   100%{background: linear-gradient(299deg, rgba(248,193,120,1) 100%, rgba(221,148,11,1) 100%);}
+}
+
+
+/* Home page Styling start here */
+
+.main-block{
+    min-height: calc(100vh - 100px);
+    background-position: bottom;
+    background-size: 100% 500px;
+    background-image: url('../src/Images/banner-1.jpg');
+    background-repeat: no-repeat;
+}
+
+
+/*  student block styling start here */
+
+.student-block{
+    min-height: calc(100vh - 100px);
+}
+
+.studentinfotable{
+    color: #fff;
+    border: 2px solid #fff;
+    text-align: center;
+}
+
+.payment-block{
+    min-height: calc(100vh - 100px);
+}
+
+.tab-window{
+    min-height: calc(100vh - 300px);
 }
