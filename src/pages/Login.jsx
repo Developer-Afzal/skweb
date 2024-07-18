@@ -39,7 +39,6 @@ const openSnackBar = (value)=>{
     e.preventDefault()
     setshowspinner(true)
      const dataResponse = await POST('login', userData)
-     console.log();
       Dispath(GetLogin(dataResponse?.data?.isAuth))
       setshowspinner(false)
       if(dataResponse?.data?.isAuth){

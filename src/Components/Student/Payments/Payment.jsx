@@ -22,17 +22,17 @@ const Payment = (props) => {
 
 
   const formhandler = async (data)=>{
-    console.log(data);
+    // console.log(data);
     // const stripe = await loadStripe('sdfsffsksbcjks')
     const session =  await POST('create-checkout-session', data)
-    console.log(session);
+    // console.log(session);
     const stripe = await stripePromise;
     const result = await stripe.redirectToCheckout({
       sessionId:session?.data?.id
     })
 
     if(result.error){
-      console.log(result.error);
+      // console.log(result.error);
     }
 
     setshowpayment(true)
@@ -43,7 +43,6 @@ const Payment = (props) => {
     setValue('s_name', s_name )
     setValue('s_class', s_class)
     setValue('amt', coaching_fee)
-    console.log('working');
     
   }
 

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef  } from 'react'
 import { Container, Row, Col, Stack } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { GET, POST } from '../utils/Api'
 import Payment from '../Components/Student/Payments/Payment'
+import dateimg from '../Images/dateimg.jpg'
+
 
 const StudentInfo = () => {
   const param = useParams()
   const [userData, setuserData] = useState('');
   const [PageShow, setPageShow] = useState('Fee')
   const [ISpay, setISpay] = useState(false);
+  const marqueeRef = useRef(null);
   useEffect(()=>{
     const {id} = param
     const FetchData = async ()=>{
@@ -28,6 +31,19 @@ const StudentInfo = () => {
   const ChangePage =(e)=>{
     setPageShow(e)
   }
+
+  const handleMouseOver = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.stop();
+    }
+  };
+
+  const handleMouseOut = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.start();
+    }
+  };
+
 
   return (
    <>
@@ -138,12 +154,22 @@ const StudentInfo = () => {
               </Col>
             </Row>):PageShow === "Imp_Date" ? 
             (<Row>
-              <h1>Important Date</h1>
+              <Col sm={6} className='mx-auto text-center '>
+                  <h1 className='heading'>Important Date</h1>
+                    <div className='latest-Event'>
+                    <marquee behavior="scroll" direction="up" scrollamount="1" ref={marqueeRef} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                    <p className='dateList'>The half yearly exams for classes 9 to 12 will commence from September 1, 2024. Ensure you have all necessary materials and start your revision early to avoid last-minute stress.</p>
+                    <p className='dateList'>The last date for fee submission for the upcoming academic year is August 10, 2024. Late fees will be charged after this date.</p>
+                    <p className='dateList'>Online fee payment options are available on the school’s official website. For any queries regarding the fee payment process.</p>
+                    </marquee> 
+                    </div>
+                
+              </Col>
             </Row>):PageShow === "Test_result" ? 
             (<Row>
                 <Col className='py-3'>
                 <h1 className='heading text-center '>Student Result</h1>
-                <table>
+                {userData?.results?.Quaterly ? <table>
                   <tr>
                     <th className='border-1 text-center tdWidth'>{YEAR !== undefined ? <>{YEAR[2]} - {+YEAR[2]+1} </>: null}</th>
                     <th className='border-1 text-center tdWidth'>Hindi</th>
@@ -160,7 +186,43 @@ const StudentInfo = () => {
                     <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Chemistry}</td>
                     <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Physics}</td>
                   </tr>
-                </table>
+                </table> :  null }
+                {userData?.results?.Halfyearly ? <table>
+                  <tr>
+                    <th className='border-1 text-center tdWidth'>{YEAR !== undefined ? <>{YEAR[2]} - {+YEAR[2]+1} </>: null}</th>
+                    <th className='border-1 text-center tdWidth'>Hindi</th>
+                    <th className='border-1 text-center tdWidth'>English</th>
+                    <th className='border-1 text-center tdWidth'>Math</th>
+                    <th className='border-1 text-center tdWidth'>Chemistry</th>
+                    <th className='border-1 text-center tdWidth'>Physics</th>
+                  </tr>
+                  <tr>
+                    <td className='text-center border-1 tdWidth'><b>Quaterly Test</b></td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Hindi}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.English}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Math}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Chemistry}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Physics}</td>
+                  </tr>
+                </table> :  null }
+                {userData?.results?.Annual ? <table>
+                  <tr>
+                    <th className='border-1 text-center tdWidth'>{YEAR !== undefined ? <>{YEAR[2]} - {+YEAR[2]+1} </>: null}</th>
+                    <th className='border-1 text-center tdWidth'>Hindi</th>
+                    <th className='border-1 text-center tdWidth'>English</th>
+                    <th className='border-1 text-center tdWidth'>Math</th>
+                    <th className='border-1 text-center tdWidth'>Chemistry</th>
+                    <th className='border-1 text-center tdWidth'>Physics</th>
+                  </tr>
+                  <tr>
+                    <td className='text-center border-1 tdWidth'><b>Quaterly Test</b></td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Hindi}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.English}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Math}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Chemistry}</td>
+                    <td className='border-1 text-center tdWidth'>{userData?.results?.Quaterly?.Physics}</td>
+                  </tr>
+                </table> :  null }
                 </Col>
             </Row>):
             (<Row>

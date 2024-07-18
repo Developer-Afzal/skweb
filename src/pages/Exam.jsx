@@ -48,7 +48,7 @@ const handleFilechange =(e)=>{
 
   const uploadresult = async (e)=>{
     if (!file) {
-      console.log('Please select a file');
+      // console.log('Please select a file');
       return;
     }
     const formData = new FormData();
@@ -56,14 +56,14 @@ const handleFilechange =(e)=>{
     try {
       const Response = await POST('uploadresult', formData);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }}
 
 const searchHandle = async ()=>{
   const data =  {enroll_no : searchkey}
   const Response = await POST('findresult',data )
   setresultData(Response?.data?.data)
-  console.log(Response?.data?.data?.results);
+  // console.log(Response?.data?.data?.results);
 }
 
 
@@ -129,12 +129,11 @@ const Downloadstdlist = async () => {
         ):activeColor === "result" ? (
         <Col sm={12} className='_flex p-5 tab-window'>
           <Col sm={8} className='text-center'>
-            
             {resultData ? 
               <Row className='border border-bottom-0'>
                 <Col>Enrollment No : {resultData?.enroll_no}</Col>
                 <Col>Student Name : {resultData?.s_name}</Col>
-                <Col>Student Class : {resultData?.s_class}</Col>
+                <Col className='text-end'>Student Class : {resultData?.s_class} <button className='default-btn' onClick={()=> setresultData('')}>Back</button></Col>
                 <Col sm={12} className='border border-start-0 border-end-0 py-2'>
                   <b>Quarterly Test Results</b>
                 
@@ -196,7 +195,7 @@ const Downloadstdlist = async () => {
         ):activeColor === "list" ? (
         <Col sm={12} className='_flex p-5 tab-window'>
           <Col sm={4} className='text-center'>
-            <Typography>
+            <Typography className='heading'>
               Click to Download Student List
             </Typography>
             <button className='default-btn px-3' onClick={Downloadstdlist}>Download Student List</button>

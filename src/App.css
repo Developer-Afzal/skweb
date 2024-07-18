@@ -446,3 +446,16 @@ form select{
 .tdWidth{
     width: 16%;
 }
+
+
+.dateList{
+    background-color: var(--lightYellow);
+    color: var(--WhiteColor);
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.dateList:hover{
+    color: var(--yellow);
+
+}

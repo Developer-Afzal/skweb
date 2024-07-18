@@ -58,7 +58,7 @@ export const PUT = async (url, data)=>{
     }
 }
 export const DELETE = async (url, user_id)=>{
-    console.log(user_id);
+    // console.log(user_id);
     try {
         const Response =  await axios.delete(url, {data:{id:user_id}});
          return Response

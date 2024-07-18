@@ -14,7 +14,7 @@ export const Login = createSlice ({
         },
 
         GetLogout:(state, acion)=>{
-            console.log('running');
+            // console.log('running');
             state.UserToken = null
         }
     }

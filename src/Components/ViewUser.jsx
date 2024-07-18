@@ -27,7 +27,7 @@ const ViewUser = () => {
 
   const findFeestatus =(value)=>{
       for(let i in  ViewSingleUser?.month){
-        console.log(i);
+        // console.log(i);
       }
   }
 
