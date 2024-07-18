@@ -14,6 +14,7 @@ import SearchPage from '../pages/SearchPage';
 import PublicRoute from '../pages/PublicRoute';
 import Home from '../pages/Home';
 import StudentInfo from '../pages/StudentInfo';
+import PageNotfound from '../pages/PageNotfound';
 
 const AppRouting = () => {
     const User_Auth = useSelector((state)=> state.Auth)
@@ -39,6 +40,7 @@ const AppRouting = () => {
             <Route path="studentinfo/:id" element={<StudentInfo/>} />
             </Route>
           )}
+          <Route path='*' element={<PageNotfound/>}/>
       </Routes>
     </BrowserRouter>
    </>
