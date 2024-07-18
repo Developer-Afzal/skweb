@@ -427,6 +427,10 @@ form select{
     text-align: center;
 }
 
+.table-fChild{
+    width: 150px;
+}
+
 .payment-block{
     min-height: calc(100vh - 100px);
 }

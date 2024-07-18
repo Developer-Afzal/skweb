@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Stack } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { GET, POST } from '../utils/Api'
 import Payment from '../Components/Student/Payments/Payment'
@@ -37,73 +37,70 @@ const StudentInfo = () => {
               </label>
               </div>
             </Col>
-            <Col sm={4}>
-            <table>
-              <tr>
-                <td>Student Name</td>
-                <td> {userData?.s_name}</td>
-              </tr>
-              <tr>
-                <td>Enrollment No</td>
-                <td>{userData?.enroll_no}</td>
-              </tr>
-              <tr>
-                <td>
-                Student Email
-                </td>
-                <td> {userData?.s_email}</td>
-              </tr>
-              <tr>
-                <td>Student Class</td>
-                <td>{userData?.s_class}</td>
-              </tr>
-              <tr>
-                <td>Student Board</td>
-              <td>{userData?.board}</td>
-              </tr>
-              <tr>
-                <td> Coaching Time</td>
-                <td>{userData?.coaching_time}</td>
-              </tr>
-              
-            </table>
+            <Col sm={12} md={4} className='text-start'>
+              <table>
+                <tr>
+                  <td className='table-fChild'>Student Name</td>
+                  <td className='text-center px-3'>:</td>
+                  <td  className='ps-5'>{userData?.s_name}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Enrollment No</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.enroll_no}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Student Class</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.s_class}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Board</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.board}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Fee</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.coaching_fee}</td>
+                </tr>
+              </table>
             </Col>
-            <Col sm={4}> 
-            <table>
-              <tr>
-                <td>Father Name</td>
-                <td> {userData?.f_name}</td>
-              </tr>
-              <tr>
-                <td>Address</td>
-                <td>{userData?.s_address}</td>
-              </tr>
-              <tr>
-                <td>
-                Student Contact No
-                </td>
-                <td> {userData?.s_contact}</td>
-              </tr>
-              <tr>
-                <td>Coaching Fee</td>
-                <td>{userData?.coaching_fee}</td>
-              </tr>
-              <tr>
-                <td>Student Board</td>
-              <td>{userData?.board}</td>
-              </tr>
-              <tr>
-                <td>Joining Date</td>
-                <td>{userData?.joining_date}</td>
-              </tr>
-            </table>
+            <Col sm={12} md={4} className='text-start pb-4'>
+              <table>
+                <tr>
+                  <td className='table-fChild'>Father Name</td>
+                  <td className='text-center px-3'>:</td>
+                  <td  className='ps-5'>{userData?.f_name}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Pincode</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.pincode}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Address</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.s_address}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>Joining Date</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.joining_date}</td>
+                </tr>
+                <tr>
+                  <td className='table-fChild'>conatct No</td>
+                  <td className='text-center'>:</td>
+                  <td className='ps-5'>{userData?.s_contact}</td>
+                </tr>
+              </table>
             </Col>
             </Row>
             <Row >
-              <Col sm={3} className='p-0'><button className='default-btn w-100 rounded-0'> Fee Status</button></Col>
-              <Col sm={3} className='p-0'><button className='default-btn w-100 rounded-0'>Important Dates</button></Col>
-              <Col sm={3} className='p-0'><button className='default-btn w-100 rounded-0'> Test Results</button></Col>
-              <Col sm={3} className='ps-0 pe-1'><button className='default-btn w-100 rounded-0'>Attendence Tracker</button></Col>
+              <Col sm={3} className='col-3 p-0  border-end'><button className='default-btn w-100 rounded-0 px-4 text-center'> Fee Status</button></Col>
+              <Col sm={3} className='col-3 p-0 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center'>Important Dates</button></Col>
+              <Col sm={3} className='col-3 p-0 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center'> Test Results</button></Col>
+              <Col sm={3}  className='col-3 ps-0 pe-1 '><button className='default-btn w-100 rounded-0 px-2 text-center'>Attendence Tracker</button></Col>
             </Row>
             <Row className='m-0'>
               <Col sm={6}>
