@@ -10,9 +10,9 @@ const Dashboard = () => {
     const FetchData = async ()=>{
         const Response = await GET('dashboard')
         if(Response?.message === "token Expired"){
-          console.log('running');
+          // console.log('running');
           const res = await POST('logout')
-          console.log(res?.data);
+          // console.log(res?.data);
           if(res?.data?.message === "success"){
             dispatch(GetLogout())
           }
