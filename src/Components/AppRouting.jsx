@@ -26,12 +26,12 @@ const AppRouting = () => {
           {User_Auth?.UserToken ?( 
           <Route element={<Layout/>}>
           <Route path='/'  element={<Dashboard/>}/>
-          <Route path="/studentlist" element={<StudentList/>}/>
-          <Route path="/studentlist/:userId" element={<ViewUser/>}/>
-          <Route path="/exam" element={<Exam/>}/>
-          <Route path="/importantDate" element={<ImportantDate/>}/>
-          <Route path="/feestatus" element={<Feestatus/>}/>
-          <Route path="/feestatus/:userId" element={<Feestatus/>}/>
+          <Route path="studentlist" element={<StudentList/>}/>
+          <Route path="studentlist/:userId" element={<ViewUser/>}/>
+          <Route path="exam" element={<Exam/>}/>
+          <Route path="importantDate" element={<ImportantDate/>}/>
+          <Route path="feestatus" element={<Feestatus/>}/>
+          <Route path="feestatus/:userId" element={<Feestatus/>}/>
           <Route path="reduxAsyncthunk" element={<AsyncThunkEx/>}/>
           </Route> ) : ( 
             <Route  element={<PublicRoute/>}>
