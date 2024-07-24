@@ -8,27 +8,27 @@ import {store} from '../app/store'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = process.env.REACT_APP_BASEURL
 
-// const LogoutUser =()=>{
-//     // const dispatch = useDispatch()
-//     // navigate user to login page
-//     store.dispatch(GetLogout())
-//   window.location.href = '/'  ;
-// }
+const LogoutUser =()=>{
+    // const dispatch = useDispatch()
+    // navigate user to login page
+    store.dispatch(GetLogout())
+  window.location.href = '/'  ;
+}
 
 // window.location.href = '/';
 
-  // axios.interceptors.response.use(
-  //   response => {
-  //     return response;
-  //   },
-  //   error => {
-  //     if (error.response && error.response.status === 401) {
-  //       // Redirect to login page
-  //       LogoutUser()
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
+  axios.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page
+        LogoutUser()
+      }
+      return Promise.reject(error);
+    }
+  );
 
 export const POST = async (url, data)=>{
     try {

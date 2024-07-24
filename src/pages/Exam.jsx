@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import resultimg from '../Images/result.jpg'
-import {GET, POST} from '../utils/Api'
+import {GET, POST, DELETE} from '../utils/Api'
 import { Select, Typography } from '@mui/material'
-
 import axios  from 'axios'
+import deleteIcon from '../Images/delete.png'
 
 const Exam = () => {
 
@@ -14,6 +14,17 @@ const Exam = () => {
   const [opentabscreen, setopentabscreen] = useState(false)
   const [searchkey, setsearchkey] = useState('')
   const [resultData, setresultData] = useState(null)
+  const [eventList, seteventList] = useState(false);
+  const [eventData, seteventData] = useState([]);
+  const [examTerm, setexamTerm] = useState('')
+
+  useEffect(()=>{
+    const FetchEvent = async ()=>{
+      const Response = await GET('geteventlist')
+      seteventData(Response?.data?.EventData)
+    }
+    FetchEvent()
+  },[])
 
   const fetchData = async () => {
     // Simulate fetching data asynchronously with setTimeout
@@ -39,8 +50,7 @@ const Exam = () => {
 
 // accept file 
 const handleFilechange =(e)=>{
-  setFile(e.target.files[0]);
-  
+  setFile(e.target.files[0]); 
 }
 
 
@@ -53,6 +63,8 @@ const handleFilechange =(e)=>{
     }
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('key', examTerm)
+   
     try {
       const Response = await POST('uploadresult', formData);
     } catch (error) {
@@ -92,6 +104,27 @@ const Downloadstdlist = async () => {
 
 // }
 
+
+const updateEvent = async ()=>{
+  const data =  {para : searchkey}
+  const Response = await POST('addevent',data )
+  console.log(Response);
+  if(Response?.data?.message === "success"){
+    seteventData( [...eventData, Response?.data?.Data])
+  }
+  
+  seteventList(false)
+}
+
+const deleteEvent = async (id)=>{
+  const Response = await DELETE('deletevent', id)
+  if(Response?.data?.message === "success"){
+    const filteredData = eventData.filter(itm => itm._id != id)
+    seteventData(filteredData)
+  }
+  console.log(Response?.data?.message);
+}
+
  
   return (
    <Container fluid>
@@ -101,29 +134,36 @@ const Downloadstdlist = async () => {
         </Col>
         <Col xs={12}  sm={6} className='d-flex align-items-center'>
         <Row>
-        <div class="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class IX </b><button class="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div class="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class X </b><button class="default-btn"  onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div class="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XI </b><button class="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div class="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XII </b><button class="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class IX </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class X </b><button className="default-btn"  onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XI </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XII </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
         </Row>
         </Col>
       </Row>) :(<Row>
         <Col sm={12} className='_flex justify-content-starts gap-0'>
-          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0' style={{background:activeColor === "upload" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('upload')}>Upload Result</button></Col>
-          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0' style={{background:activeColor === "result" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('result') }>Check Result</button></Col>
-          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0' style={{background:activeColor === "list" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('list') }>Student List</button></Col>
+          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0 border border-end-1' style={{background:activeColor === "upload" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('upload')}>Upload Result</button></Col>
+          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0 border border-end-1' style={{background:activeColor === "result" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('result') }>Check Result</button></Col>
+          <Col sm={3}><button className='w-100 default-btn rounded-0 m-0 border border-end-1' style={{background:activeColor === "list" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('list') }>Student List</button></Col>
           <Col sm={3}><button className='w-100 default-btn rounded-0 m-0' style={{background:activeColor === "Event" ? '#dd940b' : 'rgb(194 185 169)'}} onClick={()=> setactiveColor('Event') }>Update Event</button></Col>
         </Col>
         {activeColor === "upload" ? (
           <Col sm={12} className='_flex p-5 tab-window'>
-          <div className='d-flex'>
-            <select>
+          <div className='w-25'>
+            <div className='border pb-2 rounded-2 px-2'>
+            <label className='ms-2'>Select Exam Term</label>
+            <select className='upload-select default-btn w-100 ' onChange={(e)=> setexamTerm(e.target.value)}>
+              <option value="">Select</option>
               <option value="Quaterly">Quaterly</option>
               <option value="Halfyearly">Halfyearly</option>
               <option value="Annual">Annual</option>
             </select>
-          <input type='file' accept='.csv' onChange={handleFilechange}/>
-          <button className='default-btn m-0 px-2' onClick={uploadresult}>Upload</button>
+            </div>
+          <div className='border my-2 rounded-2 px-2'>
+          <label className='ms-2'>Choose CSV file</label>
+          <input type='file' accept='.csv' onChange={handleFilechange}/>  
+          </div>
+          <button className='default-btn ms-2' onClick={uploadresult}>Upload</button>
           </div>
         </Col>
         ):activeColor === "result" ? (
@@ -172,22 +212,6 @@ const Downloadstdlist = async () => {
                 </Col> : null
                 }
               </Row>
-              
-            // <><table>
-            //     <tr>
-            //       <th className='border-1'>Hindi</th>
-            //       <th className='border-1'>English</th>
-            //       <th className='border-1'>Math</th>
-            //       <th className='border-1'>Physics</th>
-            //       <th className='border-1'>Chemistry</th></tr>
-            //     <tr>
-            //       <td className='border-1'>{resultData?.results?.Quaterly?.Hindi}</td>                
-            //       <td className='border-1'>{resultData?.results?.Quaterly?.English}</td>                
-            //       <td className='border-1'>{resultData?.results?.Quaterly?.Math}</td>                
-            //       <td className='border-1'>{resultData?.results?.Quaterly?.Physics}</td>                
-            //       <td className='border-1'>{resultData?.results?.Quaterly?.Chemistry}</td>                
-            //     </tr>
-            //   </table></>
             :<><input placeholder='Student Enrollment No' className='w-100 border-1 text-center' onChange={(e)=> setsearchkey(e.target.value)}/>
             <button type='submit' className='default-btn mt-2' onClick={searchHandle}>Search</button></>}
           </Col>
@@ -202,8 +226,23 @@ const Downloadstdlist = async () => {
           </Col>
         </Col>
         ):(
-        <Col sm={12} className='_flex p-5 tab-window'>
-
+        <Col sm={12} className='_flex p-5 tab-window flex-column'>
+          <h1 className='heading'>Event List </h1>
+           {eventList ?  <Col sm={12} className='_flex text-center flex-column'>
+            <input palceholder="update latest evensts" className='w-50 border-1 text-center' onChange={(e)=> setsearchkey(e.target.value)}/>
+            <div>
+            <button className='default-btn' onClick={updateEvent}>Update</button>
+            <button className='default-btn mx-3' onClick={()=> seteventList(false)}>Cancel</button>
+            </div>
+            </Col> :
+            <Col sm={8}>
+              <div className='w-100 text-end border'><button className='default-btn' onClick={()=> seteventList(true) }>ADD NEW</button></div>
+                {eventData ? 
+                eventData.map(itm=> <div className='_flex justify-content-between align-items-center border px-2 my-1'>
+                  <p className='p-0 m-0' key={itm._id}>{itm.paragraph} </p> 
+                  <img src={deleteIcon} className='icons' onClick={()=> deleteEvent(itm._id)}/>
+                  </div>):<p></p>}
+            </Col>}
         </Col>)}
       </Row>)}
    </Container>

@@ -22,8 +22,7 @@ const StudentInfo = () => {
     FetchData()
   },[param])
 
-  const YEAR = userData?.joining_date?.split('-', 3)
- 
+  const YEAR = userData?.joining_date?.split('-', 1)  
 
   const Cancelpay =()=>{
     setISpay(false)
@@ -55,7 +54,7 @@ const StudentInfo = () => {
             <Col sm={4}>
             <div className='_flex'>
                 <input type='file' id="uploadfile" style={{display:'none'}}/>
-              <label for="uploadfile" onClick={()=> console.log('wff')}>
+              <label htmlFor="uploadfile" onClick={()=> console.log('wff')}>
                 <img style={{width:'150px'}} src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?t=st=1720551489~exp=1720555089~hmac=a8decdcac2a6654067709542e9280ca99e073d85b48a7257cd748524bf9a5d92&w=740"/>
               </label>
               </div>
@@ -120,10 +119,10 @@ const StudentInfo = () => {
             </Col>
             </Row>
             <Row >
-              <Col sm={3} className='col-3 p-0 border-end'><button className='default-btn w-100 rounded-0 px-4 text-center' onClick={()=> ChangePage('Fee')} style={{background:PageShow === "Fee" ? '#dd940b' : '#a5a29bc7'}}> Fee Status</button></Col>
-              <Col sm={3} className='col-3 p-0 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center' onClick={()=> ChangePage('Imp_Date')} style={{background:PageShow === "Imp_Date" ? '#dd940b' : '#a5a29bc7'}}>Important Dates</button></Col>
-              <Col sm={3} className='col-3 p-0 border-end'><button className='default-btn w-100 rounded-0 px-4 text-center' onClick={()=> ChangePage('Test_result')} style={{background:PageShow === "Test_result" ? '#dd940b' : '#a5a29bc7'}}> Test Results</button></Col>
-              <Col sm={3}  className='col-3 ps-0 pe-1 '><button className='default-btn w-100 rounded-0 px-2 text-center' onClick={()=> ChangePage('Attendence_Track')} style={{background:PageShow === "Attendence_Track" ? '#dd940b' : '#a5a29bc7'}}>Attendence Tracker</button></Col>
+              <Col sm={4} className=' p-0 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center' onClick={()=> ChangePage('Fee')} style={{background:PageShow === "Fee" ? '#dd940b' : '#a5a29bc7'}}> Fee Status</button></Col>
+              <Col sm={4} className='p-0 border-end'><button className='default-btn w-100 rounded-0 px-4 text-center' onClick={()=> ChangePage('Imp_Date')} style={{background:PageShow === "Imp_Date" ? '#dd940b' : '#a5a29bc7'}}>Important Dates</button></Col>
+              <Col sm={4} className=' ps-0 pe-1 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center' onClick={()=> ChangePage('Test_result')} style={{background:PageShow === "Test_result" ? '#dd940b' : '#a5a29bc7'}}> Test Results</button></Col>
+              {/* <Col sm={3}  className='col-3 ps-0 pe-1 '><button className='default-btn w-100 rounded-0 px-2 text-center' onClick={()=> ChangePage('Attendence_Track')} style={{background:PageShow === "Attendence_Track" ? '#dd940b' : '#a5a29bc7'}}>Attendence Tracker</button></Col> */}
             </Row>
             {PageShow === "Fee" ? (<Row className='m-0'>
               <Col sm={6}>
@@ -171,7 +170,7 @@ const StudentInfo = () => {
                 <h1 className='heading text-center '>Student Result</h1>
                 {userData?.results?.Quaterly ? <table>
                   <tr>
-                    <th className='border-1 text-center tdWidth'>{YEAR !== undefined ? <>{YEAR[2]} - {+YEAR[2]+1} </>: null}</th>
+                    <th className='border-1 text-center tdWidth'>{YEAR !== undefined ? <>{YEAR} - {+YEAR+1} </>: null}</th>
                     <th className='border-1 text-center tdWidth'>Hindi</th>
                     <th className='border-1 text-center tdWidth'>English</th>
                     <th className='border-1 text-center tdWidth'>Math</th>
@@ -224,10 +223,7 @@ const StudentInfo = () => {
                   </tr>
                 </table> :  null }
                 </Col>
-            </Row>):
-            (<Row>
-              <h1>Attendance</h1>
-            </Row>)}
+            </Row>): null}
     </Container>):(
       <><Payment data={userData} action={Cancelpay}/></>
     )}

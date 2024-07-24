@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Checkoutform = () => {
+const PamentStatus = () => {
   return (
     <div>Checkoutform</div>
   )
 }
 
-export default Checkoutform
+export default PamentStatus

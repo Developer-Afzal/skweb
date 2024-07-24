@@ -459,3 +459,7 @@ form select{
     color: var(--yellow);
 
 }
+
+.upload-select{
+    min-width: 120px;
+}
