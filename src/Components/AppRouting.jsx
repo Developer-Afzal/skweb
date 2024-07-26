@@ -38,7 +38,7 @@ const AppRouting = () => {
             <Route  element={<PublicRoute/>}>
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path="/paymentsuccess" element={<Success/>} />
+            <Route path="/paymentsuccess/:id" element={<Success/>} />
             <Route path="/studentinfo/:id" element={<StudentInfo/>} />
             </Route>
           )}
