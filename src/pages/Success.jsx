@@ -6,6 +6,7 @@ import { POST } from '../utils/Api'
 const Success = () => {
     const param = useParams()
     useEffect(()=>{
+        console.log(param);
        const FetchInfo = async ()=>{
         const Response = await POST(`success/${param}`, param)
         console.log(Response);
