@@ -17,8 +17,11 @@ import menuIcon from '../Images/menu.png'
 import { useNavigate } from 'react-router-dom';
 import { GetLogout } from '../features/LoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from '../Context/SnackbarContext';
 export default function Drawer() {
   const [state, setState] = React.useState({left: false});
+  const showSnackbar = useSnackbar();
+
   const auth = useSelector(state => state.Auth?.UserToken)
   const navigate = useNavigate() 
   const dispath = useDispatch()
@@ -37,6 +40,7 @@ const GoPage = (value)=>{
 const LogoutUser = () => {
   dispath(GetLogout())
   navigate('/')
+  showSnackbar('You have been logged out', 'warning');
 }
 
 

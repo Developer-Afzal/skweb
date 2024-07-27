@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { GetLogout } from '../features/LoginSlice';
 import {store} from '../app/store'
+import { useSnackbar } from '../Context/SnackbarContext';
 // import { GetLogout } from '../features/LoginSlice';
 // import { useDispatch } from 'react-redux';
 axios.defaults.withCredentials = true
@@ -12,7 +11,9 @@ const LogoutUser =()=>{
     // const dispatch = useDispatch()
     // navigate user to login page
     store.dispatch(GetLogout())
-  window.location.href = '/'  ;
+    window.location.href = '/'  ;
+    const showSnackbar = useSnackbar();
+    showSnackbar('You have been logged out', 'warning');
 }
 
 // window.location.href = '/';

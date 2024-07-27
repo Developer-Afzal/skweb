@@ -1,12 +1,15 @@
 
 import './App.css';
 import AppRoute from './Components/AppRouting'
+import {SnackbarProvider}  from './Context/SnackbarContext';
 function App() {
  
 
   return (
     <>
-      <AppRoute/>
+      <SnackbarProvider>
+        <AppRoute/>
+      </SnackbarProvider>
     </>
   );
 }
