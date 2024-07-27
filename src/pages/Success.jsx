@@ -6,13 +6,13 @@ import { POST } from '../utils/Api'
 const Success = () => {
     const {id} = useParams()
     useEffect(()=>{
-        console.log(id);
        const FetchInfo = async ()=>{
         const Response = await POST(`success/${id}`)
         console.log(Response);
        }
+       console.log(id);
        FetchInfo()
-    },[param])
+    },[id])
   return (
    <>
     <Container className='payment-block _flex'>
