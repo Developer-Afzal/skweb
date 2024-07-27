@@ -14,19 +14,21 @@ const Home = () => {
   const [showspinner, setshowspinner] = useState(false)
 
   const getStudent = async ()=>{
-    setshowspinner(true) 
+    setshowspinner(true)
+    setdisablebtn(true) 
     const Response = await POST('studentlogin', {enrollno:enrollmentNo})
     setshowspinner(false)
     if(!enrollmentNo){
-      openSnackBar({click:true, message:"Enrollment No is Required", mgss:'error' })
-      return setdisablebtn(true)
+      openSnackBar({click:true, message:"Enrollment no is required", mgss:'error' })
+       return  setdisablebtn(false) 
     }
     if(Response?.data){
+      setdisablebtn(false)
       navigate(`/studentinfo/${Response?.data?.data?.enroll_no}`)
     }else {
+      setdisablebtn(false) 
       openSnackBar({click:true,message:Response?.message, mgss:'error' })
     }
-    setdisablebtn(false)
   }
 
 
@@ -47,7 +49,6 @@ const Home = () => {
             <input placeholder='Enter Student enrollment' className='border-1' onChange={(e)=> setenrollmentNo(e.target.value) }/>
             <button className='default-btn mt-2' disabled={disablebtn} onClick={getStudent}>
               check {showspinner ? <Spinner animation="border" size='sm'/> : null}
-              
               </button>
             </Col>
         </Row>
