@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { GET, POST } from '../utils/Api'
 const Success = () => {
-    const {id} = useParams()
+    const {id, enrollno, month } = useParams()
     const [paymantData, setpaymantData] = useState(false)
     useEffect(()=>{
        const FetchInfo = async ()=>{
@@ -23,7 +23,7 @@ const Success = () => {
         <Row>
             <Col>
                <p>{paymantData?.message}</p>
-            <Link to ='/'>Back to Home</Link>
+            <Link to ={`/studentinfo/:${enrollno}`}>Back to Home</Link>
             </Col>
         </Row>
     </Container>
