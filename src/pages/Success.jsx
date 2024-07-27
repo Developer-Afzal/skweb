@@ -10,13 +10,24 @@ const Success = () => {
        const FetchInfo = async ()=>{
         const Response = await GET(`success/${id}`)
         console.log(Response);
-        if(Response){
+        if(Response?.data){
             setpaymantData(Response?.data)
+            updatestudentfee()
         }
        }
        console.log(id);
        FetchInfo()
     },[id])
+
+    const updatestudentfee = async ()=>{
+        const Data  =  {
+            enroll_no:enrollno,
+            F_month:month
+        }
+        const Response = await POST('updatefeemonth',Data)
+        console.log(Response);
+    }
+
   return (
    <>
     <Container className='payment-block _flex'>
