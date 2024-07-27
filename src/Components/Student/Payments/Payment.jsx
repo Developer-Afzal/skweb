@@ -6,6 +6,7 @@ import { POST } from '../../../utils/Api'
 import Snackbarcompo from '../../Snackbarcompo'
 import {loadStripe} from '@stripe/stripe-js';
 import PamentStatus from './PamentStatus'
+import Spinner from 'react-bootstrap/Spinner';
 const stripePromise = loadStripe(process.env.REACT_APP_PAYMENT_KEY)
 
 const Payment = (props) => {
@@ -15,6 +16,7 @@ const Payment = (props) => {
   const form = useForm();
   const [showpament, setshowpayment] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showspinner, setshowspinner] = useState(false)
   const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
   const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
   useEffect(()=>{
@@ -23,12 +25,15 @@ const Payment = (props) => {
 
 
   const formhandler = async (data)=>{
+    setshowspinner(true)
     const Response = await POST('getfeeinfo', data)
     console.log(Response?.data?.FeeMonth);
     if(Response?.data?.FeeMonth){
+      setshowspinner(false)
       openSnackBar({click:true,message:Response?.data?.message, msgType:'error' })
       return
     } 
+    setshowspinner(false)
     MakePayment(data)
   
   }
@@ -110,7 +115,9 @@ const Payment = (props) => {
             <input placeholder='Fee Amount' className='m-2' name="amt" disabled="true"  {...register('amt', {required:{value:true, message:"Fee Amount is required"}})}/>
             <p className='ps-3 m-0 errorStyle'>{errors.amt?.message}</p>
             <div className='m-2'>
-              <button type="submit" className='default-btn'>Next</button> 
+              <button type="submit" className='default-btn'>
+                Next {showspinner ? <Spinner animation="border" size='sm' /> : null}
+              </button> 
               <button type="reset" className='default-btn' onClick={()=>{reset(); action();}}>Back</button>
             </div>
           </form>

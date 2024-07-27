@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { POST } from '../utils/Api'
 const Success = () => {
-    const param = useParams()
+    const {id} = useParams()
     useEffect(()=>{
-        console.log(param);
+        console.log(id);
        const FetchInfo = async ()=>{
-        const Response = await POST(`success/${param}`, param)
+        const Response = await POST(`success/${id}`)
         console.log(Response);
        }
        FetchInfo()
