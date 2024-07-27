@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { POST } from '../utils/Api'
+import { GET, POST } from '../utils/Api'
 const Success = () => {
     const {id} = useParams()
     useEffect(()=>{
        const FetchInfo = async ()=>{
-        const Response = await POST(`success/${id}`)
+        const Response = await GET(`success/${id}`)
         console.log(Response);
        }
        console.log(id);
