@@ -23,7 +23,7 @@ const Success = () => {
         <Row>
             <Col>
                <p>{paymantData?.message}</p>
-            <Link to ={`/studentinfo/:${enrollno}`}>Back to Home</Link>
+            <Link to ={`/studentinfo/${enrollno}`}>Back to Home</Link>
             </Col>
         </Row>
     </Container>
