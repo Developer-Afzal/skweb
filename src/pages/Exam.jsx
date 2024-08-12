@@ -5,6 +5,7 @@ import {GET, POST, DELETE} from '../utils/Api'
 import { Select, Typography } from '@mui/material'
 import axios  from 'axios'
 import deleteIcon from '../Images/delete.png'
+import Snackbarcompo from '../Components/Snackbarcompo'
 
 const Exam = () => {
 
@@ -17,7 +18,11 @@ const Exam = () => {
   const [eventList, seteventList] = useState(false);
   const [eventData, seteventData] = useState([]);
   const [examTerm, setexamTerm] = useState('')
-
+  const [snackBar, setsnackBar] = useState({
+    Click: false,
+    message: "",
+    msgType: "",
+  });
   useEffect(()=>{
     const FetchEvent = async ()=>{
       const Response = await GET('geteventlist')
@@ -108,9 +113,9 @@ const Downloadstdlist = async () => {
 const updateEvent = async ()=>{
   const data =  {para : searchkey}
   const Response = await POST('addevent',data )
-  console.log(Response);
   if(Response?.data?.message === "success"){
     seteventData( [...eventData, Response?.data?.Data])
+    openSnackBar({ Click: true, msgType: "success", msg: "Successfully created" });
   }
   
   seteventList(false)
@@ -124,6 +129,15 @@ const deleteEvent = async (id)=>{
   }
   console.log(Response?.data?.message);
 }
+
+const openSnackBar = (value) => {
+  setsnackBar((prevState) => ({
+    ...prevState,
+    Click: value.Click,
+    message: value.msg,
+    msgType: "error",
+  }));
+};
 
  
   return (
@@ -238,13 +252,14 @@ const deleteEvent = async (id)=>{
             <Col sm={8}>
               <div className='w-100 text-end border'><button className='default-btn' onClick={()=> seteventList(true) }>ADD NEW</button></div>
                 {eventData ? 
-                eventData.map(itm=> <div className='_flex justify-content-between align-items-center border px-2 my-1'>
+                eventData.map((itm, index)=> <div className='_flex justify-content-between align-items-center border px-2 my-1' key={index}>
                   <p className='p-0 m-0' key={itm._id}>{itm.paragraph} </p> 
                   <img src={deleteIcon} className='icons' onClick={()=> deleteEvent(itm._id)}/>
                   </div>):<p></p>}
             </Col>}
         </Col>)}
       </Row>)}
+      <Snackbarcompo data={snackBar} openSnackBar={openSnackBar} />
    </Container>
   )
 }
