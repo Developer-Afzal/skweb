@@ -7,8 +7,8 @@ import Snackbarcompo from '../../Snackbarcompo'
 import {loadStripe} from '@stripe/stripe-js';
 import PamentStatus from './PamentStatus'
 import Spinner from 'react-bootstrap/Spinner';
+import { useSnackbar } from '../../../Context/SnackbarContext'
 const stripePromise = loadStripe(process.env.REACT_APP_PAYMENT_KEY)
-
 const Payment = (props) => {
   const {enroll_no, s_name, s_class, coaching_fee} = props.data
   const {action} = props
@@ -17,7 +17,7 @@ const Payment = (props) => {
   const [showpament, setshowpayment] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null);
   const [showspinner, setshowspinner] = useState(false)
-  const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
+  const showSnackbar =  useSnackbar()
   const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
   useEffect(()=>{
     SetFormValues()
@@ -26,11 +26,13 @@ const Payment = (props) => {
 
   const formhandler = async (data)=>{
     setshowspinner(true)
+    console.log(data);
+    
     const Response = await POST('getfeeinfo', data)
-    console.log(Response?.data?.FeeMonth);
-    if(Response?.data?.FeeMonth){
+    const monthStatus = Response?.data?.FeeMonth
+    if(monthStatus === true){
       setshowspinner(false)
-      openSnackBar({click:true,message:Response?.data?.message, msgType:'error' })
+      showSnackbar(`Fee already submitted for ${data?.F_month} month`, 'error');
       return
     } 
     setshowspinner(false)
@@ -43,12 +45,11 @@ const Payment = (props) => {
 
     const session =  await POST('create-checkout-session', data)
 
-    console.log("running", session);
-
     const stripe = await stripePromise;
     const result = await stripe.redirectToCheckout({
       sessionId:session?.data?.id
     })
+    showSnackbar(`Fee submitted`, 'error');
 
     if(result.error){
       console.log(result.error);
@@ -65,14 +66,6 @@ const Payment = (props) => {
     
   }
 
-  const openSnackBar = (value)=>{
-    setsnackBar((prevState)=>({
-      ...prevState,
-      Click:value.Click,
-      message:value.msg,
-      msgType:'error'
-    }))
-   }
 
 
 
@@ -122,7 +115,6 @@ const Payment = (props) => {
             </div>
           </form>
          </div>
-      <Snackbarcompo data={snackBar} openSnackBar={openSnackBar}/>
       </Row>
     </Container> ):(<><PamentStatus/> </>)}
           
