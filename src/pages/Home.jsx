@@ -44,7 +44,7 @@ const Home = () => {
 
       <Container className="main-block" fluid>
         <Row className="banner p-0 m-0">
-          <Col className='offset-8 mt-5 ' sm={4}>
+          <Col className='offset-0 offset-md-8 mt-5 ' sm={4}>
             <label>Student Enrollment No</label>
             <input placeholder='Enter Student enrollment' className='border-1' onChange={(e)=> setenrollmentNo(e.target.value) }/>
             <button className='default-btn mt-2' disabled={disablebtn} onClick={getStudent}>
