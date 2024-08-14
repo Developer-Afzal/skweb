@@ -42,8 +42,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!userData?.username || !userData?.password){
-      return  openSnackBar({ Click: true, msg: 'username or password required', msgType:'error' });
+    if(!userData?.username){
+      return  openSnackBar({ Click: true, msg: 'Username is required', msgType:'error' });
+    }
+    if(!userData?.password){
+      return  openSnackBar({ Click: true, msg: 'Password is required', msgType:'error' });
     }
     setshowspinner(true);
     const dataResponse = await POST("login", userData);
