@@ -41,6 +41,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!userData?.username || !userData?.password){
+      return  openSnackBar({ Click: true, msg: 'username or password required', msgType:'error' });
+    }
     setshowspinner(true);
     const dataResponse = await POST("login", userData);
     Dispath(GetLogin(dataResponse?.data?.isAuth));
