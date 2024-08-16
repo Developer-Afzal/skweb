@@ -24,16 +24,16 @@ const Header = ({srch}) => {
   return (
     <Container fluid className='position-sticky top-0 z-3 '>
           <Row className='header-block'>
-            <Col sm={1} xs={2}>
+            <Col sm={1} xs={2} style={{display: User_Auth?.UserToken ? 'block' : 'none'}}>
              {User_Auth?.UserToken ? <Drawer/> : null }
             </Col>
-            <Col xs={10} sm={4}  className='_flex logo-heading'>
+            <Col xs={9} sm={4}  className='_flex logo-heading'>
                <Link to="/" className='link'>S K Coaching Center</Link> 
             </Col>
             <Col sm={5} className='_flex d-none d-sm-flex'>
               {User_Auth?.UserToken ?  <input placeholder='Search Student by Roll No' className='header-input' onChange={changeHandle} /> : null}
             </Col>
-            <Col xs={2} className='_flex d-none d-sm-flex'>
+            <Col xs={2}  className={User_Auth?.UserToken ? 'd-none' : '_flex  d-sm-flex'}>
             <Link to="/login" className='link'> Admin </Link>
             </Col>
           </Row>

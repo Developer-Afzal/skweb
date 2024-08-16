@@ -149,9 +149,9 @@ const openSnackBar = (value) => {
         <Col xs={12}  sm={6} className='d-flex align-items-center'>
         <Row>
         <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class IX </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class X </b><button className="default-btn"  onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XI </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
-        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between"><b> Class XII </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class X </b><button className="default-btn"  onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class XI </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
+        <div className="border-2 dashboard-Card col-5 m-3 d-flex justify-content-between flex-column flex-sm-row"><b> Class XII </b><button className="default-btn" onClick={()=> setopentabscreen(true)}>Check Now</button></div>
         </Row>
         </Col>
       </Row>) :(<Row>

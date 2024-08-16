@@ -100,7 +100,7 @@ const Feestatus = () => {
           <button className='default-btn mt-5' onClick={()=> navigate(-1)}>Back</button>
         </Col>
       </Row>) : (<Row>
-          <Col sm={8} className='offset-2'>
+          <Col  className='col-10 offset-1'>
           <form >
             <input placeholder='Enrollment No' type="tel" className='m-2' name="enroll_no" disabled = {showForm} {...register('enroll_no', {required:{value:true, message:"Enrollment number is required"}})}/>
             <p className='ps-3 m-0 errorStyle'>{errors.enroll_no?.message}</p>
