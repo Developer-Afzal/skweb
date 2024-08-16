@@ -297,7 +297,7 @@ form select{
 
 .login-block{
     background: #ebb042;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
 }
 
 .login-block input{
@@ -314,7 +314,7 @@ form select{
 
 .view-block{
     padding: 10px, 0;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
     align-items: center;
 }
 .view-block .view-heading{
@@ -411,7 +411,7 @@ form select{
 /* Home page Styling start here */
 
 .main-block{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
     background-position: bottom;
     background-size: 100% 500px;
     background-image: url('../src/Images/banner-1.jpg');
@@ -422,7 +422,7 @@ form select{
 /*  student block styling start here */
 
 .student-block{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
 }
 
 .studentinfotable{
@@ -436,11 +436,11 @@ form select{
 }
 
 .payment-block{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
 }
 
 .tab-window{
-    min-height: calc(100vh - 300px);
+    min-height: calc(100svh - 300px);
 }
 
 .tdWidth{

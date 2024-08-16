@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef  } from 'react'
-import { Container, Row, Col, Stack } from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { GET, POST } from '../utils/Api'
+import { GET, } from '../utils/Api'
 import Payment from '../Components/Student/Payments/Payment'
-import dateimg from '../Images/dateimg.jpg'
-
 
 const StudentInfo = () => {
   const param = useParams()
@@ -55,11 +53,11 @@ const StudentInfo = () => {
             <div className='_flex'>
                 <input type='file' id="uploadfile" style={{display:'none'}}/>
               <label htmlFor="uploadfile" onClick={()=> console.log('wff')}>
-                <img style={{width:'150px'}} src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?t=st=1720551489~exp=1720555089~hmac=a8decdcac2a6654067709542e9280ca99e073d85b48a7257cd748524bf9a5d92&w=740"/>
+                <img style={{width:'150px'}} alt='profile' src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?t=st=1720551489~exp=1720555089~hmac=a8decdcac2a6654067709542e9280ca99e073d85b48a7257cd748524bf9a5d92&w=740"/>
               </label>
               </div>
             </Col>
-            <Col sm={12} md={4}>
+            <Col className='col-11 offset-1 col-md-4 offset-md-0'>
               <table>
                 <tr>
                   <td className='table-fChild'>Student Name</td>
@@ -88,7 +86,7 @@ const StudentInfo = () => {
                 </tr>
               </table>
             </Col>
-            <Col sm={12} md={4} className='text-start pb-4'>
+            <Col className='col-11 offset-1 col-md-4 offset-md-0 pb-4'>
               <table>
                 <tr>
                   <td className='table-fChild'>Father Name</td>
@@ -119,9 +117,9 @@ const StudentInfo = () => {
             </Col>
             </Row>
             <Row >
-              <Col sm={4} className=' p-0 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center' onClick={()=> ChangePage('Fee')} style={{background:PageShow === "Fee" ? '#dd940b' : '#a5a29bc7'}}> Fee Status</button></Col>
-              <Col sm={4} className='p-0 border-end'><button className='default-btn w-100 rounded-0 px-4 text-center' onClick={()=> ChangePage('Imp_Date')} style={{background:PageShow === "Imp_Date" ? '#dd940b' : '#a5a29bc7'}}>Important Dates</button></Col>
-              <Col sm={4} className=' ps-0 pe-1 border-end'><button className='default-btn w-100 rounded-0 px-3 text-center' onClick={()=> ChangePage('Test_result')} style={{background:PageShow === "Test_result" ? '#dd940b' : '#a5a29bc7'}}> Test Results</button></Col>
+              <Col className='col-4 p-0 border-end'><button className='default-btn w-100 rounded-0 px-5 px-md-3 text-center' onClick={()=> ChangePage('Fee')} style={{background:PageShow === "Fee" ? '#dd940b' : '#a5a29bc7'}}> Fee Status</button></Col>
+              <Col className='col-4 p-0 border-end'><button className='default-btn w-100 rounded-0 px-4 text-center' onClick={()=> ChangePage('Imp_Date')} style={{background:PageShow === "Imp_Date" ? '#dd940b' : '#a5a29bc7'}}>Important Dates</button></Col>
+              <Col className='col-4 ps-0 pe-1 border-end'><button className='default-btn w-100 rounded-0 px-5 px-md-3 text-center' onClick={()=> ChangePage('Test_result')} style={{background:PageShow === "Test_result" ? '#dd940b' : '#a5a29bc7'}}> Test Results</button></Col>
               {/* <Col sm={3}  className='col-3 ps-0 pe-1 '><button className='default-btn w-100 rounded-0 px-2 text-center' onClick={()=> ChangePage('Attendence_Track')} style={{background:PageShow === "Attendence_Track" ? '#dd940b' : '#a5a29bc7'}}>Attendence Tracker</button></Col> */}
             </Row>
             {PageShow === "Fee" ? (<Row className='m-0'>
