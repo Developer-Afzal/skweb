@@ -69,11 +69,11 @@ const handleFilechange =(e)=>{
     const formData = new FormData();
     formData.append('file', file);
     formData.append('key', examTerm)
-   
     try {
       const Response = await POST('uploadresult', formData);
+      if(!Response?.data) return openSnackBar({ Click: true, msg:Response?.message, msgType:'error' });
+      
     } catch (error) {
-      // console.log(error);
     }}
 
 const searchHandle = async ()=>{
