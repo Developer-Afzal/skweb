@@ -1,6 +1,6 @@
 import React, { useEffect, useState,  } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import {GET, POST, PUT} from '../utils/Api'
+import {GET, PUT} from '../utils/Api'
 import { Container, Row, Col } from 'react-bootstrap'
 import {set, useForm} from 'react-hook-form'
 import Snackbarcompo from '../Components/Snackbarcompo';
@@ -12,7 +12,6 @@ const Feestatus = () => {
   const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
   const [StudentData, setStudentData] = useState([])
   const [showForm, setshowForm] = useState(false)
-  const [showpayment, setshowPayment] =useState(false)
   const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
   const [refreshData, setrefreshData] = useState(false);
   const [showspinner, setshowspinner] = useState(false)

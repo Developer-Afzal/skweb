@@ -163,7 +163,7 @@ const openSnackBar = (value) => {
         </Col>
         {activeColor === "upload" ? (
           <Col sm={12} className='_flex p-5 tab-window'>
-          <div className='w-75 w-md-25'>
+          <div>
             <div className='border pb-2 rounded-2 px-2'>
             <label className='ms-2'>Select Exam Term</label>
             <select className='upload-select default-btn w-100 ' onChange={(e)=> setexamTerm(e.target.value)}>
