@@ -223,13 +223,13 @@ const StudentList = () => {
                   <td className='text-center'><button className="default-btn" onClick={()=> navigate(`/feestatus/${itm._id}`)}>{itm.month ? checkfeesStatus(itm.month) : 'unpaid'}</button></td>
                   <td className='text-center'>
                   <div className='popover d-sm-none _flex'>
-                    <div className={popOver && UserId === itm?._id ? 'popoverOpen' : 'icons-block'}>
-                    <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
+                    <div className={popOver && UserId === itm?._id  ? 'popoverOpen' : 'icons-block'}>
+                    <img className='icons' src={EditIcon} onClick={()=> EditForm(itm?._id) } alt="edit"/>
                     <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm?._id)} alt="View"/>
                     <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?._id)} alt="delete"/>
                     </div>
-                    <span className={popOver && UserId === itm?.id ? 'd-none' :  "info" }>
-                      <img className='icons' src={moreIcon} onClick={(e)=> Expandmenu(e,itm?.id)} alt="Action"/>
+                    <span className={popOver && UserId === itm?._id ? 'd-none' :  "info" }>
+                      <img className='icons' src={moreIcon} onClick={(e)=> Expandmenu(e,itm?._id)} alt="Action"/>
                     </span>
                   </div>
                       <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>

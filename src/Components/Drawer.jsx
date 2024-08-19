@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { GetLogout } from '../features/LoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from '../Context/SnackbarContext';
+import { POST } from '../utils/Api';
 export default function Drawer() {
   const [state, setState] = React.useState({left: false});
   const showSnackbar = useSnackbar();
@@ -37,9 +38,10 @@ const GoPage = (value)=>{
   navigate(value)
 }
 
-const LogoutUser = () => {
+const LogoutUser = async() => {
   dispath(GetLogout())
   navigate('/')
+  const Response = await POST('/logout')
   showSnackbar('You have been logged out', 'warning');
 }
 
