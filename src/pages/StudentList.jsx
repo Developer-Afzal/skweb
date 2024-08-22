@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Col, Row} from 'react-bootstrap'
-import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
+import {Read} from '../features/crudSlice'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
 import Pagination from '@mui/material/Pagination';
@@ -21,25 +21,22 @@ const StudentList = () => {
     const [isEdit, SetEdit] = useState(false);
     const [UserId, setUserID] = useState('');
     const [ShowForm, setShowForm] = useState(false);
-    const [pagination_No, setpagination_No] = useState(2)
     const [popOver, setpopOver] = useState(false);
     const [openModal, setopenModal] = useState(false)
     const [skeleton, setskeleton] = useState(false)
-    const [dataNotFound, setdataNotFound] = useState(false)
     const [userData, setuserData ] = useState([]) 
-    const [feeStatus, setfeeStatus] = useState('unpaid')
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(searchParams.get('page') ? searchParams.get('page') : 1 )
     const Dispatch = useDispatch();
     const navigate = useNavigate();
     const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
-    // console.log(Math.ceil(userData.length/5));
     const context = useOutletContext();
     const CurrentDate = new Date() 
   const MM = CurrentDate.getMonth() + 1;
+
+  //======== Fetching student Data
     useEffect(()=>{
       const fetchData = async()=>{
-        // userData?.length === 5 ?? setpagination_No(pagination_No + 1)
         setskeleton(true)
         const Response = await GET('studentlist', {params : {limit: '5', page_no:context ? 1 : searchParams.get('page'), searchKey:context}}) || ''
           if(!Response?.data){
@@ -47,9 +44,6 @@ const StudentList = () => {
             return null;
           }
         setuserData(Response?.data)
-        // if(Object.keys(Response?.data?.month).length === MM-3) setfeeStatus('paid')
-        setskeleton(false)
-        
       }
       fetchData()
       let setTimeOutId =  setTimeout(() => {
@@ -59,34 +53,19 @@ const StudentList = () => {
         clearTimeout(setTimeOutId)
       }
     },[page, context])
-
+  
+   //======== Checking fee Status 
     const checkfeesStatus = (value)=>{
       if(Object.keys(value).length >= MM - 3) return 'paid'
       return "unpaid"
     }
-   
-    // useEffect(()=>{
-    //   console.log('running', context);
-    //   const fetchData = async (param)=>{
-    //     const Response = await GET('studentlist',param)
-    //     const Data = context ?  Object.values(Response?.data) : ''
-    //     setuserData(Data)
-    //   }
-    //   if(context){
-    //     setSearchParams({search:context})
-    //     fetchData({params:{search:context}})
-    //   }else if(!context && userData?.length == 1){
-    //     fetchData()
-    //   }
-    //   },[context])
     
+  //======== 
     const Added = async (values)=>{
       let std_Data = values;
       if(isEdit){
         std_Data['_id'] = UserId;
-        // std_Data['fee_status'] = 'UnPaid'
         const Response = await PUT('studentlist', std_Data)
-        console.log(Response);
         if(Response === "update successfully")  openSnackBar({click:true,message:'Edited Successfully', mgss:'success' })
       }else{
         std_Data['enroll_no'] = generateRandomNineDigitNumber();
@@ -96,14 +75,13 @@ const StudentList = () => {
           const Response =  await GET('studentlist', {params : {limit: '5', page_no: searchParams.get('page')}})
           setuserData(Response?.data)
         }
-        
         openSnackBar({click:true,message:'Added Successfully', mgss:'success' })
       }
         setShowForm(false)
         reset() 
     } 
 
-
+//======= Editing form 
     const EditForm = (user)=>{
       // console.log(user?._id);
       setUserID(user?._id)
@@ -136,10 +114,6 @@ const StudentList = () => {
         const res = await GET('studentlist', {params : {limit: '5', page_no: searchParams.get('page')}})
         setuserData(res?.data)
       }
-        
-      // if(userData.slice(Startpage,EndPage).length === 1) {
-      //     handlePageChange('', currentPage-1 )
-      //   }
         openSnackBar({click:true,message:'Deleted Successfully', mgss:'success' })
       }
     }
@@ -213,7 +187,7 @@ const StudentList = () => {
                 </tr>
             </thead>
             <tbody>
-            {userData ? userData?.map((itm)=>
+            {userData && !skeleton ? userData?.map((itm)=>
                 <tr key={itm?._id} >
                   <td>{itm?.enroll_no}</td>
                   <td>{itm?.s_name}</td>
@@ -237,14 +211,14 @@ const StudentList = () => {
                       <img className='icons d-none d-sm-inline' src={DeleteIcon} onClick={()=> Deletionvalue(itm?._id)} alt="delete"/>
                   </td>  
                 </tr>
-                ):!userData  ?  <>
-                  <tr><td colSpan={7} className='text-center'>data not found</td></tr>
+                ):skeleton  ?  <>
+                <tr className='skeleton'><td colSpan={7}></td></tr>
+                <tr className='skeleton'><td colSpan={7}></td></tr>
+                <tr className='skeleton'><td colSpan={7}></td></tr>
+                <tr className='skeleton'><td colSpan={7}></td></tr>
+                <tr className='skeleton'><td colSpan={7}></td></tr>
                 </> : <>
-                <tr className='skeleton'><td colSpan={7}></td></tr>
-                <tr className='skeleton'><td colSpan={7}></td></tr>
-                <tr className='skeleton'><td colSpan={7}></td></tr>
-                <tr className='skeleton'><td colSpan={7}></td></tr>
-                <tr className='skeleton'><td colSpan={7}></td></tr>
+                  <tr><td colSpan={7} className='text-center'>data not found</td></tr>
                 </>}
             </tbody>
           </table> 
