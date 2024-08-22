@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { GetLogin } from "../features/LoginSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SHA256 } from "crypto-js";
 import Snackbarcompo from "../Components/Snackbarcompo";
 import { POST } from "../utils/Api";
@@ -35,7 +35,7 @@ const Login = () => {
 
   const handlechange = (e) => {
     setuserData({ ...userData, [e.target.name]: e.target.value });
-    const hashed = SHA256(userData).toString();
+    const hashed = SHA256(userData.password).toString();
     setHashedValue(hashed);
   };
 
@@ -66,13 +66,14 @@ const Login = () => {
     <Container fluid>
       <Row className="login-block" gap={4}>
         <Col sm={{ span: 5, offset: 7 }} className="_flex">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autocomplete="off">
             <p className="text-center fw-bolder fs-1">Login Page</p>
             <input
               placeholder="Enter user name"
               name="username"
               value={userData?.username}
               onChange={handlechange}
+              className="mx-2 my-1"
             />
             <input
               placeholder="Enter password"
@@ -80,8 +81,10 @@ const Login = () => {
               type="password"
               value={userData?.password}
               onChange={handlechange}
+              className="mx-2 my-1"
             />
-            <button type="submit" className="default-btn">
+            <Link to="/forgetpassword" className="mx-2 my-1 p-0 forget-pass">Forget Password</Link>
+            <button type="submit" className="default-btn mx-2 my-1">
               Submit &nbsp;
               {showspinner ? <Spinner animation="border" size="sm" /> : null}
             </button>

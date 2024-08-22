@@ -463,3 +463,12 @@ form select{
 .upload-select{
     min-width: 120px;
 }
+
+.forget-pass{
+    display: block;
+    color: var(--WhiteColor);
+    text-decoration: none;
+}
+.forget-pass:hover{
+    text-decoration: underline;
+}

@@ -16,6 +16,8 @@ import Home from '../pages/Home';
 import StudentInfo from '../pages/StudentInfo';
 import PageNotfound from '../pages/PageNotfound';
 import Success from '../pages/Success';
+import ForgetPass from '../pages/ForgetPass';
+import ResetPassword from '../pages/ResetPassword';
 
 const AppRouting = () => {
     const User_Auth = useSelector((state)=> state.Auth)
@@ -40,6 +42,8 @@ const AppRouting = () => {
             <Route path='/login' element={<Login/>}/>
             <Route path="/paymentsuccess/:enrollno/:month/:id" element={<Success/>} />
             <Route path="/studentinfo/:id" element={<StudentInfo/>} />
+            <Route path="/forgetpassword" element={<ForgetPass/>}/>
+            <Route path="/resetpassword/:userid/:id" element={<ResetPassword/>}/>
             </Route>
           )}
           <Route path='*' element={<PageNotfound/>}/>
