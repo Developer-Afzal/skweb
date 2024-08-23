@@ -4,7 +4,8 @@ import { Container, Col, Row} from 'react-bootstrap'
 import {Read} from '../features/crudSlice'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
-import Pagination from '@mui/material/Pagination';
+// import Pagination from '@mui/material/Pagination';
+import PaginationCompo from '../Components/Pagination'
 import Stack from '@mui/material/Stack';
 import ViewIcon from '../Images/view.png'
 import EditIcon from '../Images/edit.png'
@@ -26,7 +27,7 @@ const StudentList = () => {
     const [skeleton, setskeleton] = useState(false)
     const [userData, setuserData ] = useState([]) 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [page, setPage] = useState(searchParams.get('page') ? searchParams.get('page') : 1 )
+    const [page, setPage] = useState(searchParams.get('page') || 1 )
     const Dispatch = useDispatch();
     const navigate = useNavigate();
     const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
@@ -52,7 +53,7 @@ const StudentList = () => {
       return()=>{
         clearTimeout(setTimeOutId)
       }
-    },[page, context])
+    },[page +1 , context])
   
    //======== Checking fee Status 
     const checkfeesStatus = (value)=>{
@@ -137,8 +138,8 @@ const StudentList = () => {
   }
 
 
-    const handlePageChange = (e,value)=>{ 
-      console.log(page);
+    const handlePageChange = (value)=>{ 
+      console.log(value);
       setPage(value)
       setSearchParams({page:value})
   }
@@ -225,10 +226,10 @@ const StudentList = () => {
           <Modal data={openModal} HideModal={Hidemodal}/>
             </Container>
             { /* <button className='default-btn' onClick={GoAsynchPage}>Go To AsyncThunk Example</button> */}
-             <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
+
               {/* <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData?.length/5)} onChange={handlePageChange} className='pagination'/> */}
-              <Pagination page={page ? page : 1} count={userData?.length === 5 ? page+1 : page}  className='pagination' onChange={handlePageChange} siblingCount={0} boundaryCount={2} />
-              </Stack> 
+              {/* <Pagination page={page ? page : 1} count={userData?.length === 5 ? page+1 : page}  className='pagination' onChange={handlePageChange} siblingCount={0} boundaryCount={2} /> */}
+              <PaginationCompo currentPage={page} PageChange={handlePageChange} count={userData?.length} />
            </>
           :  <form>
            <Container className='py-2'>

@@ -472,3 +472,8 @@ form select{
 .forget-pass:hover{
     text-decoration: underline;
 }
+
+.page-active{
+    background-color: var(--yellow);
+    color: var(--WhiteColor);
+}
