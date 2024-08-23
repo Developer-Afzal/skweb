@@ -71,6 +71,7 @@ const Login = () => {
             <input
               placeholder="Enter user name"
               name="username"
+              type="email"
               value={userData?.username}
               onChange={handlechange}
               className="mx-2 my-1"
