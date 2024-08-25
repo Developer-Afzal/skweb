@@ -477,3 +477,12 @@ form select{
     background-color: var(--yellow);
     color: var(--WhiteColor);
 }
+
+.pageNot-found{
+    min-height: calc(100svh - 100px);
+}
+
+.pageNot-found img {
+    max-height: 250px;
+    max-width: 350px;
+}

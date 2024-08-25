@@ -1,8 +1,10 @@
 import { createSlice,  } from "@reduxjs/toolkit";
 
 const initialState = 
-    {   UserType:null,
-        UserToken:null
+    {   
+        UserType:null,
+        UserToken:null,
+
     }
 
 export const Login = createSlice ({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Pagination, Col } from 'react-bootstrap'
+import { Stack,  Col } from 'react-bootstrap'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
@@ -15,7 +15,7 @@ const PaginationCompo = (props) => {
     PageChange(Number(value))
   }
   return (
-    <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
+    <Stack spacing={2} className='mt-2 pe-3 justify-content-end' direction='row'>
        <Col className='_flex justify-content-end'> 
        <button className='bg-transparent border-0' onClick={PrevPage} disabled={currentPage === 1 ? true : false }> <KeyboardDoubleArrowLeftIcon/></button>
        {currentPage > 1 ? <button className='px-2 border-0 rounded-2 ' onClick={()=> DirectChange(currentPage - 1)}>{currentPage - 1}</button> : null}

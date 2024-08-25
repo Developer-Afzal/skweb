@@ -1,7 +1,9 @@
 // SnackbarContext.js
 import React, { createContext, useContext, useState } from 'react';
+import { GetLogout } from '../features/LoginSlice';
+import {store} from '../app/store'
 import { Snackbar, Alert } from '@mui/material';
-
+import axios from 'axios';
 const SnackbarContext = createContext();
 
 export const useSnackbar = () => useContext(SnackbarContext);
@@ -27,6 +29,22 @@ export const SnackbarProvider = ({ children }) => {
       open: false,
     });
   };
+
+  axios.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page
+        store.dispatch(GetLogout())
+        showSnackbar('Your Token Has Expired', 'error' )
+      }
+      return Promise.reject(error);
+    }
+  );
+
+
 
   return (
     <SnackbarContext.Provider value={showSnackbar}>

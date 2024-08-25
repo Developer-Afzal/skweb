@@ -41,18 +41,18 @@ const StudentList = () => {
         setskeleton(true)
         const Response = await GET('studentlist', {params : {limit: '5', page_no:context ? 1 : searchParams.get('page'), searchKey:context}}) || ''
           if(!Response?.data){
-            setuserData(false)
-            return null;
+            setskeleton(false)
           }
         setuserData(Response?.data)
+        setskeleton(false)
       }
       fetchData()
-      let setTimeOutId =  setTimeout(() => {
-        setskeleton(false)
-      }, 1000);
-      return()=>{
-        clearTimeout(setTimeOutId)
-      }
+      // let setTimeOutId =  setTimeout(() => {
+      //   setskeleton(false)
+      // }, 1000);
+      // return()=>{
+      //   clearTimeout(setTimeOutId)
+      // }
     },[page +1 , context])
   
    //======== Checking fee Status 
@@ -169,7 +169,7 @@ const StudentList = () => {
 
   return (
     <Container fluid className='m-0 p-0' onClick={()=> setpopOver(false)}>
-          <Stack className='_flex pt-2 px-2' direction='row' justifyContent="space-between" >
+          <Stack className='_flex pt-2 px-2 justify-content-between' direction='row'   >
           <h4 className='heading'>{ShowForm ? 'ADD NEW STUDENT' : 'Student List'}</h4>
           <button className='default-btn  px-2 me-2' onClick={()=> {setShowForm(!ShowForm); SetEdit(false); reset() }}>{!ShowForm ? 'ADD Student' : 'Back'}</button>
           </Stack>
