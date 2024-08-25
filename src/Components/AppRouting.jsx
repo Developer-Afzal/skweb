@@ -18,8 +18,11 @@ import PageNotfound from '../pages/PageNotfound';
 import Success from '../pages/Success';
 import ForgetPass from '../pages/ForgetPass';
 import ResetPassword from '../pages/ResetPassword';
+import axios from 'axios';
 
-const AppRouting = () => {
+
+const AppRouting = (props) => {
+  const {isLogin} = props
     const User_Auth = useSelector((state)=> state.Auth)
     const userType = "student"
   return (
@@ -36,6 +39,7 @@ const AppRouting = () => {
           <Route path="/feestatus" element={<Feestatus/>}/>
           <Route path="/feestatus/:userId" element={<Feestatus/>}/>
           <Route path="/reduxAsyncthunk" element={<AsyncThunkEx/>}/>
+          <Route path='*' element={<PageNotfound/>}/>
           </Route> ) : ( 
             <Route  element={<PublicRoute/>}>
             <Route path='/' element={<Home/>}/>
@@ -44,9 +48,9 @@ const AppRouting = () => {
             <Route path="/studentinfo/:id" element={<StudentInfo/>} />
             <Route path="/forgetpassword" element={<ForgetPass/>}/>
             <Route path="/resetpassword/:userid/:id" element={<ResetPassword/>}/>
+            <Route path='*' element={<PageNotfound/>}/>
             </Route>
           )}
-          <Route path='*' element={<PageNotfound/>}/>
       </Routes>
     </BrowserRouter>
    </>

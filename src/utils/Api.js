@@ -1,35 +1,38 @@
 import axios from 'axios';
-import { GetLogout } from '../features/LoginSlice';
-import {store} from '../app/store'
-import { useSnackbar } from '../Context/SnackbarContext';
+// import { GetLogout } from '../features/LoginSlice';
+// import {store} from '../app/store'
+// import { useSnackbar } from '../Context/SnackbarContext';
 // import { GetLogout } from '../features/LoginSlice';
 // import { useDispatch } from 'react-redux';
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = process.env.REACT_APP_BASEURL
 
-const LogoutUser =()=>{
+
+// const LogoutUser =()=>{
+// const showSnackbar = useSnackbar();
+
     // const dispatch = useDispatch()
     // navigate user to login page
-    store.dispatch(GetLogout())
-    window.location.href = '/'  ;
-    const showSnackbar = useSnackbar();
-    showSnackbar('You have been logged out', 'warning');
-}
+    // store.dispatch(GetLogout())
+    // window.location.href = '/'  ;
+//     return showSnackbar('You have been logged out', 'warning');
+
+// }
 
 // window.location.href = '/';
 
-  axios.interceptors.response.use(
-    response => {
-      return response;
-    },
-    error => {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page
-        LogoutUser()
-      }
-      return Promise.reject(error);
-    }
-  );
+  // axios.interceptors.response.use(
+  //   response => {
+  //     return response;
+  //   },
+  //   error => {
+  //     if (error.response && error.response.status === 401) {
+  //       // Redirect to login page
+  //       LogoutUser()
+  //     }
+  //     return Promise.reject(error);
+  //   }
+  // );
 
 export const POST = async (url, data)=>{
     try {

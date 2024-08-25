@@ -135,7 +135,7 @@ const openSnackBar = (value) => {
     ...prevState,
     Click: value.Click,
     message: value.msg,
-    msgType: "error",
+    msgType: value.msgType,
   }));
 };
 
@@ -240,16 +240,16 @@ const openSnackBar = (value) => {
           </Col>
         </Col>
         ):(
-        <Col sm={12} className='_flex p-5 tab-window flex-column'>
+        <Col sm={12} className='_flex py-5 tab-window flex-column'>
           <h1 className='heading'>Event List </h1>
-           {eventList ?  <Col sm={12} className='_flex text-center flex-column'>
-            <input palceholder="update latest evensts" className='w-50 border-1 text-center' onChange={(e)=> setsearchkey(e.target.value)}/>
+           {eventList ?  <Col sm={12} className='_flex text-center flex-column w-75'>
+            <input palceholder="update latest evensts" className='w-100 border-1 text-center' onChange={(e)=> setsearchkey(e.target.value)}/>
             <div>
             <button className='default-btn' onClick={updateEvent}>Update</button>
             <button className='default-btn mx-3' onClick={()=> seteventList(false)}>Cancel</button>
             </div>
             </Col> :
-            <Col sm={8}>
+            <Col className='col-10 col-md-8'>
               <div className='w-100 text-end border'><button className='default-btn' onClick={()=> seteventList(true) }>ADD NEW</button></div>
                 {eventData ? 
                 eventData.map((itm, index)=> <div className='_flex justify-content-between align-items-center border px-2 my-1' key={index}>

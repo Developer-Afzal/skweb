@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import {useForm} from 'react-hook-form'
@@ -7,7 +7,7 @@ const ResetPassword = () => {
     const form = useForm();
     const navigate =useNavigate()
     const [passmismatch, setPassmismatch] = useState(false)
-    const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
+    const {register, handleSubmit, formState:{errors}} = form;
     const urlData = useParams()    
 
 //====== Chnage Handling
@@ -22,7 +22,7 @@ const HandleChange = ()=>{
         const {password, confirmpassword}= data        
         if(password !== confirmpassword) return setPassmismatch(true)
         const FormData = {id:urlData?.userid, token:urlData?.id,  password: password}
-        const Response = await POST('resetpass',FormData )        
+         await POST('resetpass',FormData )        
     }
   return (
    <Container>
