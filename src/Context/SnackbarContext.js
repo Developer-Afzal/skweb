@@ -38,6 +38,7 @@ export const SnackbarProvider = ({ children }) => {
       if (error.response && error.response.status === 401) {
         // Redirect to login page
         store.dispatch(GetLogout())
+        window.location.href = '/' 
         showSnackbar('Your Token Has Expired', 'error' )
       }
       return Promise.reject(error);
