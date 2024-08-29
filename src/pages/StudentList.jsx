@@ -39,7 +39,7 @@ const StudentList = () => {
     useEffect(()=>{
       const fetchData = async()=>{
         setskeleton(true)
-        const Response = await GET('studentlist', {params : {limit: '5', page_no:context ? 1 : searchParams.get('page'), searchKey:context}}) || ''
+        const Response = await GET('studentlist', {params : {limit: '5', page_no:searchParams.get('page') ? searchParams.get('page') : handlePageChange(page), searchKey:context}}) || ''
           if(!Response?.data){
             setskeleton(false)
           }
@@ -47,13 +47,7 @@ const StudentList = () => {
         setskeleton(false)
       }
       fetchData()
-      // let setTimeOutId =  setTimeout(() => {
-      //   setskeleton(false)
-      // }, 1000);
-      // return()=>{
-      //   clearTimeout(setTimeOutId)
-      // }
-    },[page +1 , context])
+    },[page, context])
   
    //======== Checking fee Status 
     const checkfeesStatus = (value)=>{
@@ -102,11 +96,13 @@ const StudentList = () => {
       setShowForm(true);
     }
 
+//======= Deleting Student
     const Deletionvalue = (User) =>{
       setopenModal(true)
       setUserID(User)
     }
 
+//======= hiding Modal
     const Hidemodal = async (value)=>{
       setopenModal(value?.close)
       if(value?.Click){
@@ -118,6 +114,7 @@ const StudentList = () => {
         openSnackBar({click:true,message:'Deleted Successfully', mgss:'success' })
       }
     }
+//====== View User
     const ViewUser = (itm)=>{
       Dispatch(Read(itm))
       navigate(`${itm}`)
@@ -139,9 +136,9 @@ const StudentList = () => {
 
 
     const handlePageChange = (value)=>{ 
-      console.log(value);
       setPage(value)
       setSearchParams({page:value})
+      return value
   }
 
 
@@ -229,7 +226,7 @@ const StudentList = () => {
 
               {/* <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData?.length/5)} onChange={handlePageChange} className='pagination'/> */}
               {/* <Pagination page={page ? page : 1} count={userData?.length === 5 ? page+1 : page}  className='pagination' onChange={handlePageChange} siblingCount={0} boundaryCount={2} /> */}
-              <PaginationCompo currentPage={page} PageChange={handlePageChange} count={userData?.length} />
+              {!context ? <PaginationCompo currentPage={page} PageChange={handlePageChange} count={userData?.length} /> : <></>}
            </>
           :  <form>
            <Container className='py-2'>
