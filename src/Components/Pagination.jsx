@@ -20,7 +20,7 @@ const PaginationCompo = (props) => {
        <button className='bg-transparent border-0' onClick={PrevPage} disabled={currentPage === 1 ? true : false }> <KeyboardDoubleArrowLeftIcon/></button>
        {currentPage > 1 ? <button className='px-2 border-0 rounded-2 ' onClick={()=> DirectChange(currentPage - 1)}>{currentPage - 1}</button> : null}
        <button className='px-2 border-0 rounded-2 page-active' onClick={()=> DirectChange(currentPage)}>{currentPage}</button>
-        <button className='bg-transparent border-0' onClick={NextPage} disabled={count < 5 ? true : false }> <KeyboardDoubleArrowRightIcon color='success'/></button>
+        <button className='bg-transparent border-0' onClick={NextPage} disabled={count < 5 ? true : false }> <KeyboardDoubleArrowRightIcon/></button>
        </Col>
     </Stack> 
   )
